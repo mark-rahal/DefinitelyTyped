@@ -249,6 +249,30 @@ declare namespace Consul {
                 status?: string | undefined;
             }
 
+            interface RegisterProxy {
+              destinationServiceName?: string | undefined;
+              destinationServiceId?: string | undefined;
+              localServiceAddress?: string | undefined;
+              localServicePort?: number | undefined;
+            }
+
+            interface RegisterSidecarService {
+              id?: string | undefined;
+              name?: string | undefined;
+              tags?: string[] | undefined;
+              meta?: Record<string, string> | undefined;
+              port?: number | undefined;
+              kind?: string | undefined;
+              check?: RegisterCheck | undefined;
+              checks?: RegisterCheck[] | undefined;
+              proxy?: RegisterProxy | undefined;
+            }
+
+            interface RegisterConnect {
+              native?: boolean | undefined,
+              sidecarService?: RegisterSidecarService | undefined;
+            }
+
             interface ListOptions extends CommonOptions { }
 
             interface RegisterOptions extends CommonOptions {
@@ -260,6 +284,8 @@ declare namespace Consul {
                 meta?: Record<string, string> | undefined;
                 check?: RegisterCheck | undefined;
                 checks?: RegisterCheck[] | undefined;
+                proxy?: RegisterProxy | undefined;
+                connect?: RegisterConnect | undefined;
             }
 
             interface DeregisterOptions extends CommonOptions {
